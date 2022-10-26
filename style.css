@@ -88,7 +88,7 @@ h1 {
   background-color: white;
   border-radius: 8px;
   border: 2px solid black;
-  transform: top 0.5s;
+  transition: top 0.5s;
 }
 .popup p {
   font-size: 28px;

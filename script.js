@@ -4,6 +4,7 @@ const password2 = document.querySelector("#password2");
 const email = document.querySelector("#email");
 const sendBtn = document.querySelector(".send");
 const clearBtn = document.querySelector(".clear");
+const popup = document.querySelector(".popup");
 
 //putting all elements as array of items
 const input = [user, password, password2, email];
@@ -14,6 +15,7 @@ clearBtn.addEventListener("click", (e) => {
   //clear form is simple putting empty string as value
   input.forEach((el) => {
     el.value = "";
+    clearError(el);
   });
 });
 //showing error - element from checkForm fumnction if first condition is true
@@ -68,6 +70,22 @@ const checkForm = (input) => {
     }
   });
 };
+const showPopup = () => {
+  //geting all form-box elements
+  const errorsElements = document.querySelectorAll(".form-box");
+  //helper counter
+  let errorCount = 0;
+  //for each element which have got error class on it raise counter
+  errorsElements.forEach((el) => {
+    if (el.classList.contains("error")) {
+      errorCount++;
+    }
+  });
+  //only if theres no errors show send form confirmation:
+  if (errorCount === 0) {
+    popup.classList.add("show-popup");
+  }
+};
 //using RegEx - see documentation
 const checkEmail = (email) => {
   //condition from generator - which signs are allowed (RegEx generator) and test() function
@@ -93,4 +111,6 @@ sendBtn.addEventListener("click", (e) => {
   checkPassword(password, password2);
   //function using RegEx() to validate email:
   checkEmail(email);
+  //showing from send confirmation
+  showPopup();
 });
